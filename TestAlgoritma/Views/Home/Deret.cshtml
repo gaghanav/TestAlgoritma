@@ -1,0 +1,43 @@
+﻿@model TestAlgoritma.Models.Deret
+
+@{
+    ViewBag.Title = "Deret";
+    var output = TempData["deretOutput"] as List<String>;
+}
+<h2>Deret</h2>
+<p>Tujuan : membuat deret karakter (angka atau huruf)</p>
+
+@using (Html.BeginForm("Deret", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal mx-2">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Input, htmlAttributes: new { @class = "col-xs-12 col-md-1 col-md-offset-1" })
+            <div class="col-xs-9 col-md-4">
+                @Html.EditorFor(model => model.Input, new { htmlAttributes = new { @class = "form-control", Placeholder = "Angka atau Huruf maksimal 50 kata", ModelClientValidationMaxLengthRule = "50" } })
+                @Html.ValidationMessageFor(model => model.Input, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-3 col-md-6">
+                <input type="submit" value="Create" id="btn1" class="btn btn-primary" />
+            </div>
+            <br />
+            <br />
+            @Html.LabelFor(model => model.Output, htmlAttributes: new { @class = "col-xs-12 col-xs-offset-0 col-md-1 col-md-offset-1" })
+            <div class="col-xs-12 col-md-10">
+                @if (output != null)
+                {
+                    foreach (var data in TempData["deretOutput"] as List<String>)
+                    {
+                        <p class="col-12">@data</p>
+                    }
+                }
+            </div>
+        </div>
+
+
+    </div>
+}
+

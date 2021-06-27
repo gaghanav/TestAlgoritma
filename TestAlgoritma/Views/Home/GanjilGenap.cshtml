@@ -1,0 +1,51 @@
+﻿@model TestAlgoritma.Models.GanjilGenap
+
+@{
+    ViewBag.Title = "Ganjil Genap";
+    var output = TempData["ganjilGenapOutput"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GanjilGenap</title>
+</head>
+<body>
+    <h2>Deret</h2>
+    <p>Tujuan : membuat deret karakter (angka atau huruf)</p>
+    @using (Html.BeginForm("GanjilGenap", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal mx-2">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Input, htmlAttributes: new { @class = "col-xs-12 col-md-1 col-md-offset-1" })
+                <div class="col-xs-9 col-md-4">
+                    @Html.EditorFor(model => model.Input, new { htmlAttributes = new { @class = "form-control", Placeholder = "Angka atau Huruf maksimal 50 kata", min = "1" } })
+                    @Html.ValidationMessageFor(model => model.Input, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-3 col-md-6">
+                    <input type="submit" value="Create" id="btn1" class="btn btn-primary" />
+                </div>
+                <br />
+                <br />
+                @Html.LabelFor(model => model.Output, htmlAttributes: new { @class = "col-xs-12 col-xs-offset-0 col-md-1 col-md-offset-1" })
+                <div class="col-xs-12 col-md-10">
+                    @if (output != null)
+                    {
+                        {
+                            <p class="col-12">@output</p>
+                        }
+                    }
+                </div>
+            </div>
+
+
+        </div>
+    }
+</body>
+</html>

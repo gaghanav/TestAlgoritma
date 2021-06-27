@@ -1,0 +1,55 @@
+﻿@model TestAlgoritma.Models.Sort
+
+@{
+    ViewBag.Title = "Sort";
+    var output = TempData["sortOutput"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sort</title>
+</head>
+<body>
+    <h2>Sort</h2>
+    <p>Tujuan : menyusun deretan angka</p>
+
+    @using (Html.BeginForm("Sort", "Home", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal mx-2">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Input, htmlAttributes: new { @class = "col-xs-12 col-xs-offset-0 col-md-1 col-md-offset-1" })
+                <div class="col-xs-9 col-md-4">
+                    @Html.EditorFor(model => model.Input, new { htmlAttributes = new { @class = "form-control", Placeholder = "Angka atau Huruf 20 Karakter", maxLength = "20" } })
+                    @Html.ValidationMessageFor(model => model.Input, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    Ascending @Html.RadioButtonFor(model => model.Ascending, "Ascending")
+                    Descending @Html.RadioButtonFor(model => model.Ascending, "Descending")
+                </div>
+
+                <div class="col-xs-2 col-md-10 col-md-offset-2 mt-md-2">
+                    <input type="submit" value="Sort" id="btn1" class="btn btn-primary" />
+                </div>
+                @Html.LabelFor(model => model.Output, htmlAttributes: new { @class = "col-xs-12 col-xs-offset-0 col-md-1 col-md-offset-1" })
+                <div class="col-xs-12 col-md-10 mt-2 mb-0">
+                    @if (output != null)
+                    {
+                        <p class="text-dark">
+                            @output
+                        </p>
+                    }
+                </div>
+            </div>
+
+
+        </div>
+    }
+</body>
+</html>
